@@ -39,7 +39,7 @@ namespace PracticeConsole
                     Exit();
                 }
             }
-            while (!x.StartsWith("1") || !x.StartsWith("2") || !x.StartsWith("0"));
+            while (!x.StartsWith("1") || !x.StartsWith("2") || !x.StartsWith("0")); // ! means not, validation mag loloop pag may nag true.
         }
 
         static void Register()
@@ -56,8 +56,8 @@ namespace PracticeConsole
                 Console.Write("Enter your name: ");
                 name = Console.ReadLine();
 
-                containsNumber = name.Any(c => char.IsDigit(c)); // check kung my number, mag rereturn ng bool
-                hasSpace = name.Contains(" "); // check kung my space, mag rereturn ng bool
+                containsNumber = name.Any(c => char.IsDigit(c)); // check kung my number, mag rereturn ng boolean (true of false)
+                hasSpace = name.Contains(" "); // check kung my space, mag rereturn ng boolean (true of false)
 
                 if (containsNumber)
                     Console.WriteLine("Your name has a number. "); // message lang does not validate anything.
@@ -94,12 +94,12 @@ namespace PracticeConsole
                     correctLenght = true;
                 }
             }
-            while (!correctLenght || password.Trim() == ""); // actual validation, mag loloop pag may nag true.
+            while (!correctLenght || password.Trim() == ""); // validation, mag loloop pag may nag true.
 
-            StorePassword(name, password);
+            StorePassword(name, password); // icacall ung nasa baba with name and password as parameters and isasave sa notepad
+
             Console.WriteLine($"You are now registered.");
-
-            MainMenu();
+            MainMenu(); // back to main menu
         }
 
         public static void Login()
@@ -116,10 +116,10 @@ namespace PracticeConsole
                 Console.Write("Enter password: ");
                 password = Console.ReadLine();
             }
-            while (!ValidatePassword(name, password)); // icacall ung nasa baba with name and password as parameters
+            while (!ValidatePassword(name, password)); // icacall ung nasa baba with name and password as parameters and ccheck kung match sa notepad
 
             Console.WriteLine("You are now logged in.");
-            MainMenu();
+            MainMenu(); // back to main menu
         }
 
         static void Exit()
@@ -139,7 +139,7 @@ namespace PracticeConsole
         {
             try
             {
-                string[] content = System.IO.File.ReadAllLines(@"C:\Users\Benjo\Desktop\test.txt");
+                string[] content = System.IO.File.ReadAllLines(@"C:\Users\Benjo\Desktop\test.txt"); //change mo sa path ng kagaya sa taas.
 
                 if (username != content[0] || password != content[1])
                 {
@@ -154,8 +154,8 @@ namespace PracticeConsole
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Register first.", ex.Message);
-                MainMenu();
+                Console.WriteLine("Register first.", ex.Message); // validation kung nag login agad ng hindi pa nag register and wala pa ung notepad.
+                MainMenu(); // back to main menu
                 return false;
             }
 
