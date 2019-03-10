@@ -17,23 +17,29 @@ namespace PracticeConsole
 
         static void MainMenu()
         {
-            Console.WriteLine("===============================");
-            Console.WriteLine("1. Login 2. Register 0. Exit");
-            Console.WriteLine("===============================");
-            string x = Console.ReadLine();
+            string x = string.Empty;
 
-            if (x.StartsWith("1"))
+            do
             {
-                Login();
+                Console.WriteLine("===============================");
+                Console.WriteLine("1. Login 2. Register 0. Exit");
+                Console.WriteLine("===============================");
+                x = Console.ReadLine();
+
+                if (x.StartsWith("1"))
+                {
+                    Login();
+                }
+                else if (x.StartsWith("2"))
+                {
+                    Register();
+                }
+                else if (x.StartsWith("0"))
+                {
+                    Exit();
+                }
             }
-            else if (x.StartsWith("2"))
-            {
-                Register();
-            }
-            else
-            {
-                Exit();
-            }
+            while (!x.StartsWith("1") || !x.StartsWith("2") || !x.StartsWith("0"));
         }
 
         static void Register()
