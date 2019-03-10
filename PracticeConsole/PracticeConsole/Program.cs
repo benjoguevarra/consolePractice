@@ -130,22 +130,39 @@ namespace PracticeConsole
         // store password method
         static void StorePassword(string username, string password)
         {
-            string[] credentials = new string[] { username, password };
-            System.IO.File.WriteAllLines(@"C:\Users\Benjo\Desktop\test.txt", credentials); //change mo sa path ng desktop mo. auto create na ung notepad
+            try
+            {
+                string[] credentials = new string[] { username, password };
+                System.IO.File.WriteAllLines(@"C:\Users\Benjo\Desktop\test.txt", credentials); //change mo sa path ng desktop mo. auto create na ung notepad
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Register first!" ,ex.Message);
+            }
         }
 
         // validate password method, will return a boolean
         static bool ValidatePassword(string username, string password)
         {
-            string[] content = System.IO.File.ReadAllLines(@"C:\Users\Benjo\Desktop\test.txt");  
-
-            if (username != content[0] && password != content[1])
+            try
             {
-                Console.WriteLine("Wrong name or password.");
+                string[] content = System.IO.File.ReadAllLines(@"C:\Users\Benjo\Desktop\test.txt");
+
+                if (username != content[0] && password != content[1])
+                {
+                    Console.WriteLine("Wrong name or password.");
+                    return false;
+                }
+              
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Register first!", ex.Message);
+                MainMenu();
                 return false;
             }
-            else
-                return true;
+
+                    return true;
         }
 
     }
