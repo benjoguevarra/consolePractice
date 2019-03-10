@@ -60,13 +60,13 @@ namespace PracticeConsole
                 hasSpace = name.Contains(" "); // check kung my space, mag rereturn ng bool
 
                 if (containsNumber)
-                    Console.WriteLine("Your name has a number! "); // message lang does not validate anything.
+                    Console.WriteLine("Your name has a number. "); // message lang does not validate anything.
 
                 if (hasSpace)
-                    Console.WriteLine("Your name has a space! ");
+                    Console.WriteLine("Your name has a space. ");
 
                 if (name == "")
-                    Console.WriteLine("Enter a name! ");
+                    Console.WriteLine("Enter a name. ");
             }
             while (containsNumber || hasSpace || name == ""); // actual validation, mag loloop pag may nag true.
 
@@ -118,7 +118,7 @@ namespace PracticeConsole
             }
             while (!ValidatePassword(name, password)); // icacall ung nasa baba with name and password as parameters
 
-            Console.WriteLine("You are now logged in!");
+            Console.WriteLine("You are now logged in.");
             MainMenu();
         }
 
@@ -130,15 +130,8 @@ namespace PracticeConsole
         // store password method
         static void StorePassword(string username, string password)
         {
-            try
-            {
-                string[] credentials = new string[] { username, password };
-                System.IO.File.WriteAllLines(@"C:\Users\Benjo\Desktop\test.txt", credentials); //change mo sa path ng desktop mo. auto create na ung notepad
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine("Register first!" ,ex.Message);
-            }
+            string[] credentials = new string[] { username, password };
+            System.IO.File.WriteAllLines(@"C:\Users\Benjo\Desktop\test.txt", credentials); //change mo sa path ng desktop mo. auto create na ung notepad
         }
 
         // validate password method, will return a boolean
@@ -148,21 +141,24 @@ namespace PracticeConsole
             {
                 string[] content = System.IO.File.ReadAllLines(@"C:\Users\Benjo\Desktop\test.txt");
 
-                if (username != content[0] && password != content[1])
+                if (username != content[0] || password != content[1])
                 {
                     Console.WriteLine("Wrong name or password.");
                     return false;
+                }
+                else
+                { 
+                    return true;
                 }
               
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Register first!", ex.Message);
+                Console.WriteLine("Register first.", ex.Message);
                 MainMenu();
                 return false;
             }
 
-                    return true;
         }
 
     }
